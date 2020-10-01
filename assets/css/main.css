@@ -14,11 +14,10 @@ body {
     font-family: 'Sniglet', cursive;
 }
 
-.btn-pr {
+.btn {
     border: none;
     outline: none;
     color: #fff;
-    background-color: #03a9f4;
     padding: 10px 20px;
     cursor: pointer;
     border-radius: 5px;
@@ -78,18 +77,10 @@ body {
     border: 2px solid #8b0000;
 }
 
-
-/*.btn-pr {
-    background-color: transparent;
-    border: none;
-    outline: none;
-    color: #fff;
+.btn-pr {
     background-color: #03a9f4;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 5px;
-}*/
+}
 
-.btn-wr {
+.btn-dg {
     background: #ff172b;
 }

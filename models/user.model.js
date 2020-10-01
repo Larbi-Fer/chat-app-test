@@ -38,3 +38,48 @@ exports.getUserId = id => {
         })
     })
 }
+
+// إرسال طلب صداقة
+exports.sendFriendRequest = async(data) => {
+    // add my data to friend freindReqursts
+    // add friend data to my sendRequests
+    try {
+        await mongoose.connect(DB_URL)
+        await User.updateOne({ _id: data.friendId }, {
+            $push: { friendRequests: { name: data.myName, id: data.myId } }
+        })
+        await User.updateOne({ _id: data.myId }, {
+            $push: { sendRequests: { name: data.friendName, id: data.friendId } }
+        })
+        mongoose.disconnect()
+        return
+    } catch (error) {
+        mongoose.disconnect()
+        throw new Error(error)
+    }
+}
+
+exports.canselFriendRequest = async(data) => {
+    // removed me from friend friendRequests
+    // removed friend from my sendRequests
+    try {
+        await mongoose.connect(DB_URL)
+        await User.updateOne({ _id: data.friendId }, {
+            $pull: { friendRequests: { id: data.myId } }
+        })
+        await User.updateOne({ _id: data.myId }, {
+            $pull: { sendRequests: { id: data.friendId } }
+        })
+        mongoose.disconnect()
+        return
+    } catch (error) {
+        mongoose.disconnect()
+        throw new Error(error)
+    }
+}
+
+exports.acceptFriendRequest = (data) => {}
+
+exports.rejectFriendRequest = () => {}
+
+exports.deleteFriend = () => {}

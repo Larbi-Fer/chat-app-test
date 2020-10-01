@@ -64,10 +64,7 @@ exports.login = (email, password) => {
                     } else { //                       ↓ ↓  2.2.1
                         // install express-session  &  connect-mongodb-session
                         mongoose.disconnect()
-                        resolve({
-                            id: user._id,
-                            isAdmin: user.isAdmin
-                        })
+                        resolve(user)
                     }
                 })
             }

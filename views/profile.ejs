@@ -9,17 +9,26 @@
         <h3><%= username %></h3>
 
         <% if (!isOwner) { %>
-            <div>
-                <% if (isFriends) { %>
-                    is friend
-                <% } else if (isReuestSend) { %>
-                    requst send 
-                <% } else if (isReuestRecieved) { %>
-                    request recieves
-                <% } else { %> 
-                    add
-                <% } %>
-            </div>
+            <form method="POST">
+                <input type="hidden" name="myId" value="<%= myId %>">
+                <input type="hidden" name="myName" value="<%= myName %>">
+                <input type="hidden" name="myImage" value="<%= myImage %>">
+                <input type="hidden" name="friendId" value="<%= friendId %>">
+                <input type="hidden" name="friendName" value="<%= username %>">
+                <input type="hidden" name="friendImage" value="<%= userImage %>">
+                <div>
+                    <% if (isFriends) { %>
+                        <button type="submit" class="btn btn-pr btn-dg" formaction="/friend/delete">Delete Friend</button>
+                    <% } else if (isReuestSend) { %>
+                        <button type="submit" class="btn btn-pr btn-dg" formaction="/friend/cancel">Cancel Request</button>
+                    <% } else if (isReuestRecieved) { %>
+                        <button type="submit" class="btn btn-pr" formaction="/friend/accept">Accept Friend Request</button>
+                        <button type="submit" class="btn btn-pr btn-dg" formaction="/friend/reject">Reject</button>
+                    <% } else { %> 
+                        <button type="submit" class="btn btn-pr" formaction="/friend/add">Add Friend</button>
+                    <% } %>
+                </div>
+            </form>
         <% } %>
 
     </div>

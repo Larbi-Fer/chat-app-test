@@ -83,6 +83,8 @@ exports.postLogin = (req, res, next) => {
     authModel.login(req.body.email, req.body.password)
         .then(result => {
             req.session.userId = String(result.id)
+            req.session.name = result.username
+            req.session.image = result.image
             res.redirect('/')
         })
         .catch(err => {
