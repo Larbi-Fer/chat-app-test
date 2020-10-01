@@ -9,6 +9,8 @@ const authRouter = require('./routes/auth.router')
 const profileRouter = require('./routes/profile.router')
 const freindRouter = require('./routes/friend.router')
 
+const getFriendRequest = require('./models/user.model').getFriendRequests
+
 
 const app = express()
 const port = 3000
@@ -31,6 +33,16 @@ app.use(session({
 app.set('view engine', 'ejs')
 app.set('views', 'views')
 
+app.use((req, res, next) => {
+    if (req.session.userId) {
+        getFriendRequest(req.session.userId).then(requests => {
+            req.friendRequest = requests
+            next()
+        }).catch(err => next(err))
+    } else {
+        next()
+    }
+})
 
 app.use('/', authRouter)
 app.use('/profile', profileRouter)
@@ -42,6 +54,7 @@ app.get('/error', (req, res, next) => {
     res.render('error.ejs', {
         isUser: req.session.userId,
         isAdmin: req.session.isAdmin,
+        friendRequest: req.friendRequest,
         pageTitle: "error"
     })
 })
@@ -53,13 +66,21 @@ app.use((error, req, res, next) => {
     res.render('error.ejs', {
         isUser: req.session.userId,
         isAdmin: req.session.isAdmin,
+        friendRequest: req.friendRequest,
         pageTitle: "error",
         err: error
     })
 })
 
 app.use((req, res, next) => {
-    res.send("page Not Found")
+    res.status(404)
+    res.render('error.ejs', {
+        isUser: req.session.userId,
+        isAdmin: req.session.isAdmin,
+        friendRequest: req.friendRequest,
+        pageTitle: "Not Found",
+        err: "Page Not Found"
+    })
 })
 
 app.listen(port, (err) => {

@@ -24,6 +24,7 @@ exports.getProfile = (req, res, next) => {
             myId: req.session.userId,
             myName: req.session.name,
             myImage: req.session.image,
+            friendRequest: req.friendRequest,
 
             friendId: data._id,
             username: data.username,

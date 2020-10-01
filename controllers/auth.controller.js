@@ -95,7 +95,12 @@ exports.postLogin = (req, res, next) => {
 
 
 exports.logout = (res, req, next) => {
-    req.session.destroy(() => {
-        res.redirect('/')
-    })
+    try {
+        req.session.destroy(() => {
+            res.redirect('/')
+        })
+    } catch (error) {
+        console.log(error);
+        next(error)
+    }
 }

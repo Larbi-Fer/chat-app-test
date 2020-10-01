@@ -144,3 +144,14 @@ exports.deleteFriend = async(data) => {
         throw new Error(error)
     }
 }
+
+exports.getFriendRequests = async id => {
+    try {
+        await mongoose.connect(DB_URL)
+        const data = await User.findById(id, { friendRequests: true })
+        return data.friendRequests
+    } catch (error) {
+        mongoose.disconnect()
+        throw new Error(error)
+    }
+}
