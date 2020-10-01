@@ -78,8 +78,69 @@ exports.canselFriendRequest = async(data) => {
     }
 }
 
-exports.acceptFriendRequest = (data) => {}
+exports.acceptFriendRequest = async(data) => {
+    // add my and friend data to friends
+    // add friend data to my sendRequests
+    // removed me from friend friendRequests
+    // removed friend from my sendRequests
+    try {
+        await mongoose.connect(DB_URL)
+            // الإضافة
+        await User.updateOne({ _id: data.friendId }, {
+            $push: { friends: { name: data.myName, image: data.myImage, id: data.myId } }
+        })
+        await User.updateOne({ _id: data.myId }, {
+                $push: { friends: { name: data.friendName, image: data.friendImage, id: data.friendId } }
+            })
+            // الحذف
+        await User.updateOne({ _id: data.friendId }, {
+            $pull: { sendRequests: { id: data.myId } }
+        })
+        await User.updateOne({ _id: data.myId }, {
+            $pull: { friendRequests: { id: data.friendId } }
+        })
+        mongoose.disconnect()
+        return
+    } catch (error) {
+        mongoose.disconnect()
+        throw new Error(error)
+    }
+}
 
-exports.rejectFriendRequest = () => {}
+exports.rejectFriendRequest = async(data) => {
+    // removed me from friend friendRequests
+    // removed friend from my sendRequests
+    try {
+        await mongoose.connect(DB_URL)
+        await User.updateOne({ _id: data.friendId }, {
+            $pull: { sendRequests: { id: data.myId } }
+        })
+        await User.updateOne({ _id: data.myId }, {
+            $pull: { friendRequests: { id: data.friendId } }
+        })
+        mongoose.disconnect()
+        return
+    } catch (error) {
+        mongoose.disconnect()
+        throw new Error(error)
+    }
+}
 
-exports.deleteFriend = () => {}
+exports.deleteFriend = async(data) => {
+    // removed me from friend friendRequests
+    // removed friend from my sendRequests
+    try {
+        await mongoose.connect(DB_URL)
+        await User.updateOne({ _id: data.friendId }, {
+            $pull: { friends: { id: data.myId } }
+        })
+        await User.updateOne({ _id: data.myId }, {
+            $pull: { friends: { id: data.friendId } }
+        })
+        mongoose.disconnect()
+        return
+    } catch (error) {
+        mongoose.disconnect()
+        throw new Error(error)
+    }
+}

@@ -18,8 +18,29 @@ exports.cancel = (req, res, next) => {
     })
 }
 
-exports.accept = (req, res, next) => {}
+exports.accept = (req, res, next) => {
+    userModel.acceptFriendRequest(req.body).then(() => {
+        res.redirect('/profile/' + req.body.friendId)
+    }).catch(err => {
+        console.log(err);
+        next(err)
+    })
+}
 
-exports.reject = (req, res, next) => {}
+exports.reject = (req, res, next) => {
+    userModel.rejectFriendRequest(req.body).then(() => {
+        res.redirect('/profile/' + req.body.friendId)
+    }).catch(err => {
+        console.log(err);
+        next(err)
+    })
+}
 
-exports.delete = (req, res, next) => {}
+exports.delete = (req, res, next) => {
+    userModel.deleteFriend(req.body).then(() => {
+        res.redirect('/profile/' + req.body.friendId)
+    }).catch(err => {
+        console.log(err);
+        next(err)
+    })
+}
