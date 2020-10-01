@@ -1,0 +1,123 @@
+.nav{
+    background: #0082e6;
+    height: 80px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000000;
+}
+label.logo{
+    color: white;
+    font-size: 35px;
+    line-height: 80px;
+    padding: 0 60px;
+    font-weight: bold;
+}
+.nav ul{
+    float: right;
+    margin-right: 20px;
+}
+.nav ul li{
+    display: inline-block;
+    line-height: 80px;
+    margin: 0 5px;
+}
+.nav ul li a{
+    color: white;
+    font-size: 17px;
+    padding: 7px 13px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    transition: .5s;
+}
+.nav ul li a.active{
+    background-color: #1b9bff;
+    transition:.5s;
+}
+.nav ul li a.active,.nav ul li a:hover{
+    background-color: #1b9bff;
+    /*transition: .5s;*/
+}
+
+.nav ul li:last-child input,
+.frm,
+.nav ul li:last-child button{
+    border-radius: 50px;
+    font-size: 17px;
+    padding: 5px 10px;
+    outline: none;
+}
+.nav ul li:last-child button{
+    background: #00589b;
+    color: #68ffe6;
+}
+
+.checkbtn{
+    font-size: 30px;
+    color: white;
+    float: right;
+    line-height: 80px;
+    width: 30px;
+    margin-right: 40px;
+    margin-top: 20px;
+    cursor: pointer;
+    display: none;
+}
+.check{
+    display: none;
+}
+@media ( max-width: 1163px ){
+    label.logo{
+        font-size: 30px;
+        padding-left: 50px;
+    }
+    .nav ul li button,
+    .nav ul li input,
+    .nav ul li a{
+        font-size: 16px;
+    }
+    
+}
+@media ( max-width: 1095px){
+    .checkbtn{
+        display: block;
+    }
+    ul{
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        background: #2c3e50;
+        /*background: rgba(44, 62, 80, .7);*/
+        top: 80px;
+        left: -100%;
+        text-align: center;
+        text-shadow: -20px 20px 20px black;
+        transition: all .5s;
+        overflow: auto;
+        z-index: 100000;
+    }
+    .nav ul li:not(:last-child){
+        display: block;
+        margin: 50px 0;
+        line-height: 30px;
+    }
+    /*.nav ul li:last-child{
+        position: absolute;
+        float: right;
+    }*/
+    .nav ul li a{
+        font-size: 20px;
+    }
+    .nav ul li a.activ{
+        background: none;
+    }
+    .nav ul li a:hover,.nav ul li a:active{
+        background: none;
+        color: #0082e6;
+        font-size: 25px;
+    }
+    #check:checked ~ ul{
+        left: 0;
+    }
+}

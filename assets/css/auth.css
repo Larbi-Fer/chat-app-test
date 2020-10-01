@@ -1,0 +1,112 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Sniglet', cursive;
+    background-size: cover;
+}
+
+option {
+    background: #2b2b2b;
+    font-size: 18px;
+    color: #fff;
+}
+
+option:checked {
+    background: #141414;
+}
+
+.login {
+    position: absolute;
+    top: 100px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 400px;
+    padding: 40px;
+    background-color: rgba(0, 0, 0, .8);
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, .5);
+    border-radius: 10px;
+}
+
+.login h2 {
+    margin: 0 0 30px;
+    padding: 0;
+    color: #fff;
+    text-align: center;
+}
+
+.input-field {
+    position: relative;
+    padding-top: 10px;
+    overflow: hidden;
+}
+
+.input-field textarea,
+.input-field select,
+.input-field input {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #fff;
+    margin-bottom: 30px;
+    border: none;
+    outline: none;
+    background: transparent;
+    border-bottom: 1px solid #fff;
+}
+
+.input-field span {
+    background: #0c409c;
+    width: 100%;
+    height: 2px;
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+    transform: translate(-100%);
+    transition: .7s ease-in-out;
+}
+
+.input-field textarea:focus~span,
+.input-field textarea:valid~span,
+.input-field select:focus~span,
+.input-field select:valid~span,
+.input-field input:focus~span,
+.input-field input:valid~span {
+    transform: translate(0%);
+}
+
+.input-field label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 20px 0;
+    font-size: 16px;
+    color: #fff;
+    pointer-events: none;
+    transition: .5s;
+}
+
+.input-field textarea:focus~label,
+.input-field textarea:valid~label,
+.input-field select:focus~label,
+.input-field select:valid~label,
+.input-field-foc label,
+.input-field input:focus~label,
+.input-field input:valid~label {
+    top: -20px;
+    left: 0;
+    color: #03a9f4;
+    font-size: 11px;
+}
+
+button[type="button"],
+button[type="submit"] {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: #fff;
+    background-color: #03a9f4;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}

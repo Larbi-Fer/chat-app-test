@@ -1,0 +1,54 @@
+<%- include('parts/header.ejs') %>
+<%- include('parts/navbar.ejs') %>
+<link rel="stylesheet" href="css/auth.css">
+
+        <div class="login">
+            <h2>Create Account</h2>
+            <% if (authError.length != 0) { %>
+                <div class="alert alert-err">
+                    <%= authError[0] %> 
+                </div>
+            <% } %>
+            <% if (validationErrors.length != 0) { %>
+                <div class="alert alert-err">
+                    <%= validationErrors[0] %> 
+                </div>
+            <% } %>
+            <form action="/singup" method="POST">
+
+                <div class="input-field">
+                    <input type="text" id="" name="username" required>
+                    <label>User Name</label>
+                    <span></span>
+                </div>
+
+                <div class="input-field">
+                    <input type="email" id="" name="email" required>
+                    <label>E-mail</label>
+                    <span></span>
+                </div>
+
+                <div class="input-field">
+                    <input type="password" id="" name="password" required>
+                    <label>password</label>
+                    <span></span>
+                </div>
+
+                <div class="input-field">
+                    <input type="password" id="" name="confirmPassword" required>
+                    <label>Confirm Password</label>
+                    <span></span>
+                </div>
+
+                <button type="submit">Create Account</button>
+
+            </form>
+
+            <div style="color: #fff; margin-top: 15px">
+                Already have account ? <a href="/login">Login</a>
+            </div>
+
+        </div>
+
+</body>
+</html>

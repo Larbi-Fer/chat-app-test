@@ -1,0 +1,116 @@
+.messge-btn {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translate(-50%, -40%) perspective(1000px) rotateX(40deg);
+    text-align: center;
+    box-shadow: -1px 8px 15px 10px #000;
+    transition: .5s;
+}
+
+.messge-btn * {
+    font-size: 18px;
+}
+
+.messge-btn.active {
+    top: 200px;
+    opacity: 1;
+    transform: translate(-50%, -10%) perspective(1000px) rotateX(0deg);
+}
+
+.messge-M {
+    padding: 20px 40px;
+    border-top: 2px solid rgba(0, 0, 0, .3);
+}
+
+.messge-btn.black {
+    background: #1a1919;
+    color: #fff;
+}
+
+.messge-btn.white {
+    background: #e6e6e6;
+}
+
+.mm {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    overflow: auto;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    background: rgba(0, 0, 0, .8);
+    display: none;
+    transition: .5s;
+}
+
+.mm.active {
+    opacity: 1;
+}
+
+
+/*  العنوان  */
+
+.title {
+    padding: 15px 20px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, .2);
+    font-weight: 1000;
+    font-size: 27px;
+    font-style: oblique;
+}
+
+.messge-btn.rtl .title {
+    text-align: right;
+}
+
+.messge-btn.black .title {
+    background: #0e0d0d;
+}
+
+.messge-btn.white .title {
+    background: #d2d2d6;
+}
+
+
+/*  الجزء السفلي  */
+
+.bottom-messge {
+    padding: 10px 20px;
+    display: flex;
+}
+
+.messge-btn.rtl .bottom-messge {
+    justify-content: flex-end;
+}
+
+.messge-btn .bottom-messge button {
+    margin-right: 20px;
+}
+
+.messge-btn.rtl .bottom-messge button {
+    margin-left: 20px;
+    margin-right: 0;
+}
+
+.messge-btn.black .bottom-messge {
+    background: #0e0d0d;
+    border-top: 1px solid rgba(255, 255, 255, .2);
+}
+
+.messge-btn.white .bottom-messge {
+    background: #d2d2d6;
+    border-top: 1px solid rgba(0, 0, 0, .2);
+}
+
+body.none::-webkit-scrollbar {
+    width: 0;
+}
+
+.blur {
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    filter: blur(30);
+}
