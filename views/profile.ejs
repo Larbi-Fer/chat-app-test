@@ -35,5 +35,9 @@
 </div>
 
 <%- include('parts/scripts.ejs') %>
+<% if (!isOwner && !isFriends) { %>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/sockets/init.js"></script>
+<% } %>
 </body>
 </html>

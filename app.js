@@ -4,6 +4,8 @@ const path = require('path')
 const session = require('express-session')
 const SessionStore = require('connect-mongodb-session')(session)
 const flash = require('connect-flash') // install
+const socketIo = require('socket.io')
+
 
 const authRouter = require('./routes/auth.router')
 const profileRouter = require('./routes/profile.router')
@@ -13,7 +15,13 @@ const getFriendRequest = require('./models/user.model').getFriendRequests
 
 
 const app = express()
+const server = require('http').createServer(app)
 const port = 3000
+const io = socketIo(server)
+
+io.on('connection', socket => {
+    require('./sockets/init.socket')(socket)
+})
 
 app.use(express.static(path.join(__dirname, 'assets')))
 app.use(express.static(path.join(__dirname, 'images')))
@@ -83,7 +91,7 @@ app.use((req, res, next) => {
     })
 })
 
-app.listen(port, (err) => {
+server.listen(port, (err) => {
     console.log("error : ", err)
     console.log(`Example app listening on port : `, port)
 })
