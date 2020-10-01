@@ -1,0 +1,30 @@
+<%- include('parts/header.ejs') %>
+<%- include('parts/navbar.ejs') %>
+
+<div class="container cart-propartis">
+    <div class="cart-group-2">
+        <img src="/<%= userImage %>" alt="">
+    </div>
+    <div class="cart-group-2">
+        <h3><%= username %></h3>
+
+        <% if (!isOwner) { %>
+            <div>
+                <% if (isFriends) { %>
+                    is friend
+                <% } else if (isReuestSend) { %>
+                    requst send 
+                <% } else if (isReuestRecieved) { %>
+                    request recieves
+                <% } else { %> 
+                    add
+                <% } %>
+            </div>
+        <% } %>
+
+    </div>
+</div>
+
+<%#- include('scripts.ejs') %>
+</body>
+</html>

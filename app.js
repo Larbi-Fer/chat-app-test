@@ -6,6 +6,7 @@ const SessionStore = require('connect-mongodb-session')(session)
 const flash = require('connect-flash') // install
 
 const authRouter = require('./routes/auth.router')
+const profileRouter = require('./routes/profile.router')
 
 
 const app = express()
@@ -31,6 +32,7 @@ app.set('views', 'views')
 
 
 app.use('/', authRouter)
+app.use('/profile', profileRouter)
 
 
 app.get('/error', (req, res, next) => {

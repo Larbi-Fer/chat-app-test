@@ -82,8 +82,7 @@ exports.getLogin = (req, res, next) => {
 exports.postLogin = (req, res, next) => {
     authModel.login(req.body.email, req.body.password)
         .then(result => {
-            req.session.userId = result.id
-            req.session.isAdmin = result.isAdmin
+            req.session.userId = String(result.id)
             res.redirect('/')
         })
         .catch(err => {
