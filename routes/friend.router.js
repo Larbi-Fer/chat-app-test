@@ -5,8 +5,6 @@ const authGuard = require('./guards/auth.guard')
 
 const friendController = require("../controllers/friend.controller");
 
-router.post('/add', authGuard.isAuth, bodyParser, friendController.add)
-
 router.post('/cancel', authGuard.isAuth, bodyParser, friendController.cancel)
 
 router.post('/accept', authGuard.isAuth, bodyParser, friendController.accept)

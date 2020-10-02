@@ -19,6 +19,7 @@ const server = require('http').createServer(app)
 const port = 3000
 const io = socketIo(server)
 
+require('./sockets/friend.socket')(io)
 io.on('connection', socket => {
     require('./sockets/init.socket')(socket)
 })

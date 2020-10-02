@@ -9,13 +9,13 @@
         <h3><%= username %></h3>
 
         <% if (!isOwner) { %>
-            <form method="POST">
-                <input type="hidden" name="myId" value="<%= myId %>">
-                <input type="hidden" name="myName" value="<%= myName %>">
-                <input type="hidden" name="myImage" value="<%= myImage %>">
-                <input type="hidden" name="friendId" value="<%= friendId %>">
-                <input type="hidden" name="friendName" value="<%= username %>">
-                <input type="hidden" name="friendImage" value="<%= userImage %>">
+            <form method="POST" id="friends-form">
+                <input id="myId" type="hidden" name="myId" value="<%= myId %>">
+                <input id="myName" type="hidden" name="myName" value="<%= myName %>">
+                <input id="myImage" type="hidden" name="myImage" value="<%= myImage %>">
+                <input id="friendId" type="hidden" name="friendId" value="<%= friendId %>">
+                <input id="friendName" type="hidden" name="friendName" value="<%= username %>">
+                <input id="friendImage" type="hidden" name="friendImage" value="<%= userImage %>">
                 <div>
                     <% if (isFriends) { %>
                         <button type="submit" class="btn btn-pr btn-dg" formaction="/friend/delete">Delete Friend</button>
@@ -25,7 +25,7 @@
                         <button type="submit" class="btn btn-pr" formaction="/friend/accept">Accept Friend Request</button>
                         <button type="submit" class="btn btn-pr btn-dg" formaction="/friend/reject">Reject</button>
                     <% } else { %> 
-                        <button type="submit" class="btn btn-pr" formaction="/friend/add">Add Friend</button>
+                        <button id="addBtn" type="submit" class="btn btn-pr">Add Friend</button>
                     <% } %>
                 </div>
             </form>
@@ -35,9 +35,10 @@
 </div>
 
 <%- include('parts/scripts.ejs') %>
-<% if (!isOwner && !isFriends) { %>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="/js/sockets/init.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/sockets/init.js"></script>
+<% if (!isOwner && !isFriends && !isReuestSend && !isReuestRecieved) { %>
+    <script src="/js/sockets/friend.js"></script>
 <% } %>
 </body>
 </html>
