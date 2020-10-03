@@ -19,12 +19,11 @@ exports.getProfile = (req, res, next) => {
     userModel.getUserId(id).then(data => {
         res.render("profile", {
             pageTitle: data.username,
-            isUser: true,
+            isUser: req.session.userId,
 
-            myId: req.session.userId,
             myName: req.session.name,
             myImage: req.session.image,
-            friendRequest: req.friendRequest,
+            friendRequests: req.friendRequests,
 
             friendId: data._id,
             username: data.username,

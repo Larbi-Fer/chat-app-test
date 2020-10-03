@@ -1,4 +1,4 @@
-const sendFriendRequest = require('../models/user.model').sendFriendRequest
+const { sendFriendRequest, getFriends } = require('../models/user.model');
 
 module.exports = (io) => {
     io.on('connection', socket => {
@@ -12,6 +12,13 @@ module.exports = (io) => {
             }).catch(err => {
                 socket.emit('requestFailed')
             })
+        })
+
+        socket.on('getOnlineFriends', id => {
+            getFriends(id).then(friends => {
+                let onlineFriends = friends.filter(friend => io.onlineUsers[friend.id] /** if true */ )
+                socket.emit('onlineFriends', onlineFriends, "friend.socket 21")
+            }).catch(err => console.log(err))
         })
     })
 }

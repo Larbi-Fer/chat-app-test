@@ -10,6 +10,7 @@ const socketIo = require('socket.io')
 const authRouter = require('./routes/auth.router')
 const profileRouter = require('./routes/profile.router')
 const freindRouter = require('./routes/friend.router')
+const homeRouter = require('./routes/home.router')
 
 const getFriendRequest = require('./models/user.model').getFriendRequests
 
@@ -19,10 +20,12 @@ const server = require('http').createServer(app)
 const port = 3000
 const io = socketIo(server)
 
+io.onlineUsers = {}
+
 require('./sockets/friend.socket')(io)
-io.on('connection', socket => {
-    require('./sockets/init.socket')(socket)
-})
+require('./sockets/init.socket')(io)
+console.log(io.onlineUsers);
+
 
 app.use(express.static(path.join(__dirname, 'assets')))
 app.use(express.static(path.join(__dirname, 'images')))
@@ -45,7 +48,7 @@ app.set('views', 'views')
 app.use((req, res, next) => {
     if (req.session.userId) {
         getFriendRequest(req.session.userId).then(requests => {
-            req.friendRequest = requests
+            req.friendRequests = requests
             next()
         }).catch(err => next(err))
     } else {
@@ -53,6 +56,7 @@ app.use((req, res, next) => {
     }
 })
 
+app.use('/', homeRouter)
 app.use('/', authRouter)
 app.use('/profile', profileRouter)
 app.use('/friend', freindRouter)
@@ -63,7 +67,7 @@ app.get('/error', (req, res, next) => {
     res.render('error.ejs', {
         isUser: req.session.userId,
         isAdmin: req.session.isAdmin,
-        friendRequest: req.friendRequest,
+        friendRequests: req.friendRequests,
         pageTitle: "error"
     })
 })
@@ -75,7 +79,7 @@ app.use((error, req, res, next) => {
     res.render('error.ejs', {
         isUser: req.session.userId,
         isAdmin: req.session.isAdmin,
-        friendRequest: req.friendRequest,
+        friendRequests: req.friendRequests,
         pageTitle: "error",
         err: error
     })
@@ -86,7 +90,7 @@ app.use((req, res, next) => {
     res.render('error.ejs', {
         isUser: req.session.userId,
         isAdmin: req.session.isAdmin,
-        friendRequest: req.friendRequest,
+        friendRequests: req.friendRequests,
         pageTitle: "Not Found",
         err: "Page Not Found"
     })

@@ -14,7 +14,7 @@
             <li><a href="/singup" <%= pageTitle === 'Singup' ? 'class=active': '' %>>Singup</a></li>
         <% } %>
         <% if (isUser) { %>
-            <input type="hidden" id="userId" value="<%= myId %>">
+            <input type="hidden" id="userId" value="<%= isUser %>">
             <li class="nav-li" style="color: #fff">
                 <span title="Friend Requests" id="friendReqestsDropdown" class="glyphicon glyphicon-user btn btn-pr" onclick="toggleClass('.friendReqestsDropdown','active');this.classList.add('btn-pr');this.classList.remove('btn-dg');">
                     <span>Friend Requests</span>
@@ -25,10 +25,10 @@
                         <h2 class="list-1"> Friend Requests </h2>
                     </div>
                     <table id="friendRequests" style="padding: 0;" id="iami">
-                        <% if ( friendRequest.length === 0 ) { %>
+                        <% if ( friendRequests.length === 0 ) { %>
                             <span class="no-friend">no frienf requests</span>
                         <% } %>
-                        <% for( let request of friendRequest ) { %>
+                        <% for( let request of friendRequests ) { %>
                             <tr>
                                 <td>
                                     <a href="/profile/<%= request.id %>">

@@ -10,7 +10,7 @@
 
         <% if (!isOwner) { %>
             <form method="POST" id="friends-form">
-                <input id="myId" type="hidden" name="myId" value="<%= myId %>">
+                <input id="myId" type="hidden" name="myId" value="<%= isUser %>">
                 <input id="myName" type="hidden" name="myName" value="<%= myName %>">
                 <input id="myImage" type="hidden" name="myImage" value="<%= myImage %>">
                 <input id="friendId" type="hidden" name="friendId" value="<%= friendId %>">

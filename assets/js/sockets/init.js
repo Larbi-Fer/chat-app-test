@@ -1,8 +1,9 @@
 const socket = io()
+let myId = document.getElementById('userId').value
 
 socket.on('connect', () => {
-    let id = document.getElementById('userId').value
-    socket.emit('joinNotificationsRoom', id)
+    socket.emit('joinNotificationsRoom', myId)
+    socket.emit('getOnline', myId)
 })
 
 const btn = document.getElementById('friendReqestsDropdown')

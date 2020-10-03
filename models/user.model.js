@@ -149,7 +149,20 @@ exports.getFriendRequests = async id => {
     try {
         await mongoose.connect(DB_URL)
         const data = await User.findById(id, { friendRequests: true })
+        mongoose.disconnect()
         return data.friendRequests
+    } catch (error) {
+        mongoose.disconnect()
+        throw new Error(error)
+    }
+}
+
+exports.getFriends = async id => {
+    try {
+        await mongoose.connect(DB_URL)
+        const data = await User.findById(id, { friends: true })
+        mongoose.disconnect()
+        return data.friends
     } catch (error) {
         mongoose.disconnect()
         throw new Error(error)

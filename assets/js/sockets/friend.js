@@ -1,6 +1,6 @@
-const addBtn = document.getElementById('addBtn')
+const addBtn = document.getElementById('addBtn');
 
-const myId = document.getElementById('myId').value
+const myId1 = document.getElementById('myId').value
 const myName = document.getElementById('myName').value
 const myImage = document.getElementById('myImage').value
 const friendId = document.getElementById('friendId').value
@@ -10,7 +10,7 @@ const friendImage = document.getElementById('friendImage').value
 addBtn.onclick = (e) => {
     e.preventDefault()
     socket.emit('sendFriendRequest', {
-        myId,
+        myId: myId1,
         myImage,
         myName,
         friendId,
