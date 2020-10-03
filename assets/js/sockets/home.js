@@ -5,16 +5,17 @@ socket.on('onlineFriends', friends => {
     if (friends.length === 0) {
         div.innerHTML = "<p class'aleart aleart-dg'>no Online Friends</p>"
     } else {
-        let html = "<div>\n"
+        let html = "<div class='container'>\n"
         for (let friend of friends) {
-            html += "  <tr>\n"
-            html += '  <img src="/' + friend.image + '">\n'
-            html += '  <div>\n    <a href="/profile/' + friend.id + '">\n      <h3>' + friend.name + '</h3>\n    </a>\n'
-            html += '    <span>chat</span>\n'
-            html += '  </div>\n  </tr>\n'
+            html += "  <div class='cart-user'>\n"
+            html += '  <a href="/profile/' + friend.id + '">'
+            html += '    <img class="user-active" src="/' + friend.image + '">\n'
+            html += '  </a>'
+            html += '  <div class="cart-cart">\n    <a href="/profile/' + friend.id + '">\n      <h3>' + friend.name + '</h3>\n    </a>\n'
+            html += '    <a class="btn btn-pr" href="/chat/' + friend.chatId + '">Chat</a>\n'
+            html += '  </div>\n  </div>\n'
         }
         html += '</div>'
-        console.log(html);
         div.innerHTML = html
     }
 })

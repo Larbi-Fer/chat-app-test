@@ -3,12 +3,13 @@
     <label for="check">
             <li><img src="/img/R3.png" alt="القائمة" class="checkbtn"></li>
         </label>
-    <label for="" class="logo">online shope</label>
+    <label for="" class="logo"><%= myName %></label>
     <ul>
-        <li><a href="/" <%= pageTitle === 'Home' ? 'class=active': '' %>>Home</a></li>
         <% if (isUser) { %>
-            <li><a href="/cart" <%= pageTitle === 'Cart' ? 'class=active': '' %>>Cart</a></li>
-            <li><a href="/orders" <%= pageTitle === 'Orders' ? 'class=active': '' %>>Orders</a></li>
+            <li><a href="/" <%= pageTitle === 'Home' ? 'class=active': '' %>>Home</a></li>
+            <li><a href="/cart" <%= pageTitle === 'Groups' ? 'class=active': '' %>>Groups</a></li>
+            <li><a href="/orders" <%= pageTitle === 'Friends' ? 'class=active': '' %>>Friends</a></li>
+            <li><a href="/profile" <%= pageTitle === myName ? 'class=active': '' %>>profile</a></li>
         <% } else { %>
             <li><a href="/login" <%= pageTitle === 'Login' ? 'class=active': '' %>>Login</a></li>
             <li><a href="/singup" <%= pageTitle === 'Singup' ? 'class=active': '' %>>Singup</a></li>

@@ -2,6 +2,8 @@ const mongoose = require('mongoose')
 
 const DB_URL = "mongodb://localhost:27017/chat-app"
 
+const Chat = require('./chat.model').Chat
+
 const userSchema = mongoose.Schema({
     username: String,
     email: String,
@@ -9,7 +11,7 @@ const userSchema = mongoose.Schema({
     image: { type: String, default: "default-user-image.jpg" },
     isOnline: { type: Boolean, default: false },
     friends: {
-        type: [{ name: String, image: String, id: String }],
+        type: [{ name: String, image: String, id: String, chatId: String }],
         default: []
     },
     friendRequests: {
@@ -86,11 +88,30 @@ exports.acceptFriendRequest = async(data) => {
     try {
         await mongoose.connect(DB_URL)
             // الإضافة
-        await User.updateOne({ _id: data.friendId }, {
-            $push: { friends: { name: data.myName, image: data.myImage, id: data.myId } }
+        let newChat = new Chat({
+            users: [data.myId, data.friendId]
         })
+        let chatDoc = await newChat.save()
+        await User.updateOne({ _id: data.friendId }, {
+            $push: {
+                friends: {
+                    name: data.myName,
+                    image: data.myImage,
+                    id: data.myId,
+                    chatId: chatDoc._id
+                }
+            }
+        })
+
         await User.updateOne({ _id: data.myId }, {
-                $push: { friends: { name: data.friendName, image: data.friendImage, id: data.friendId } }
+                $push: {
+                    friends: {
+                        name: data.friendName,
+                        image: data.friendImage,
+                        id: data.friendId,
+                        chatId: chatDoc._id
+                    }
+                }
             })
             // الحذف
         await User.updateOne({ _id: data.friendId }, {

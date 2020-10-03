@@ -9,7 +9,8 @@ exports.getSingup = (req, res, next) => {
         validationErrors: req.flash("validationError"),
         isUser: false,
         isAdmin: false,
-        pageTitle: 'Singup'
+        pageTitle: 'Singup',
+        myName: "chat app"
     });
     error = ""
     errors = ""
@@ -72,7 +73,8 @@ exports.getLogin = (req, res, next) => {
         authError: req.flash("authError"),
         isUser: false,
         isAdmin: false,
-        pageTitle: 'Login'
+        pageTitle: 'Login',
+        myName: "chat app"
     })
     error = ""
 }
