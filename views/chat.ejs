@@ -1,0 +1,32 @@
+<%- include('parts/header.ejs') %>
+<%- include('parts/navbar.ejs') %>
+
+    <div>
+        
+        <img src="/<%= friendData.image %>"> <br>
+        <a href="/profile/<%= friendData.id %>"><%= friendData.username %></a>
+
+    </div>
+    <input type="hidden" id="chatId" value="<%= chatId %>">
+<table>
+<div id="messages-container"></div>
+    <% for( let message of messages ) { %>
+        <tr>
+            <td><span><%= message.content %> </span></td>
+        </tr>
+    <% } %>
+    <tr>
+        <textarea id="message" cols="30" rows="5"></textarea>
+        <button id="sendBtn">Send</button>
+    </tr>
+
+</table>
+
+<%- include('parts/scripts.ejs') %>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/sockets/init.js"></script>
+<script src="/js/sockets/chat.js"></script>
+
+
+</body>
+</head>

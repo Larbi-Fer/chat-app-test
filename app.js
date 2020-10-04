@@ -25,7 +25,7 @@ io.onlineUsers = {}
 
 require('./sockets/friend.socket')(io)
 require('./sockets/init.socket')(io)
-console.log(io.onlineUsers);
+require('./sockets/chat.socket')(io)
 
 
 app.use(express.static(path.join(__dirname, 'assets')))
@@ -70,6 +70,7 @@ app.get('/error', (req, res, next) => {
         isUser: req.session.userId,
         isAdmin: req.session.isAdmin,
         friendRequests: req.friendRequests,
+        myName: req.session.name,
         pageTitle: "error"
     })
 })
@@ -82,6 +83,7 @@ app.use((error, req, res, next) => {
         isUser: req.session.userId,
         isAdmin: req.session.isAdmin,
         friendRequests: req.friendRequests,
+        myName: req.session.name,
         pageTitle: "error",
         err: error
     })
@@ -94,6 +96,7 @@ app.use((req, res, next) => {
         isAdmin: req.session.isAdmin,
         friendRequests: req.friendRequests,
         pageTitle: "Not Found",
+        myName: req.session.name,
         err: "Page Not Found"
     })
 })

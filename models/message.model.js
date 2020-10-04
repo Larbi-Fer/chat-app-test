@@ -14,7 +14,7 @@ const Message = mongoose.model('message', messageSchema)
 exports.getMessages = async chatId => {
     try {
         await mongoose.connect(DB_URL)
-        let messages = await Message.find({ chat: chatId }).populate({
+        let messages = await Message.find({ chat: chatId }, null, { sort: { timestamp: 1 } }).populate({
             path: 'chat', //  field
             model: 'chat', // model
             populate: {
@@ -25,6 +25,20 @@ exports.getMessages = async chatId => {
         })
         mongoose.disconnect()
         return messages
+    } catch (error) {
+        mongoose.disconnect()
+        throw new Error(error)
+    }
+}
+
+exports.newMessage = async msg => {
+    try {
+        await mongoose.connect(DB_URL)
+        msg.timestamp = Date.now()
+        let newMsg = new Message(msg)
+        await newMsg.save()
+        mongoose.disconnect()
+        return
     } catch (error) {
         mongoose.disconnect()
         throw new Error(error)
