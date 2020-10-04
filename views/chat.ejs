@@ -1,26 +1,34 @@
 <%- include('parts/header.ejs') %>
 <%- include('parts/navbar.ejs') %>
 
-    <div>
-        
+<div class="cart-group-2">
+
+    <div class="cart-user-l">
+
         <img src="/<%= friendData.image %>"> <br>
-        <a href="/profile/<%= friendData.id %>"><%= friendData.username %></a>
+        <a class="btn btn-pr" href="/profile/<%= friendData.id %>"><%= friendData.username %></a>
+        <input type="hidden" id="chatId" value="<%= chatId %>">
 
     </div>
-    <input type="hidden" id="chatId" value="<%= chatId %>">
-<table>
-<div id="messages-container"></div>
-    <% for( let message of messages ) { %>
-        <tr>
-            <td><span><%= message.content %> </span></td>
-        </tr>
-    <% } %>
-    <tr>
-        <textarea id="message" cols="30" rows="5"></textarea>
-        <button id="sendBtn">Send</button>
-    </tr>
+    
+    <div id="messages-container" class="cart-message">
+        <% for( let message of messages ) { %>
+            <div class="msg <%= isUser == message.sender ? "my-msg" : "friend-msg" %>">
+                <div class="msg-text">
+                    <span><%= message.content %> </span>
+                </div>
+            </div>
+        <% } %>
+        <div class="text-message">
+            <textarea id="message" rows="3"></textarea>
+            <button id="sendBtn" class="btn btn-pr">Send</button>
+        </div>
+    
+    </div>
 
-</table>
+</div>
+
+
 
 <%- include('parts/scripts.ejs') %>
 <script src="/socket.io/socket.io.js"></script>

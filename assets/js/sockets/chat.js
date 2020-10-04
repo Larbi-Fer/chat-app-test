@@ -17,5 +17,16 @@ sendBtn.onclick = () => {
 }
 
 socket.on('newMessage', msg => {
-    msgContainer.innerHTML += msg.content + "<br>"
+    let html = "";
+    let msg_type;
+    if (msg.sender == myId) msg_type = "my-msg"
+    else msg_type = "friend-msg"
+
+    html += '<div class="msg ' + msg_type + '">\n'
+    html += '    <div class="msg-text">\n'
+    html += '        <span>' + msg.content + '</span>\n'
+    html += '    </div>\n'
+    html += '<div>\n'
+
+    msgContainer.innerHTML += html
 })
