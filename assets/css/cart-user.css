@@ -1,0 +1,39 @@
+.cart-user {
+    padding: 20px 40px;
+    background: #0400ff;
+    border-radius: 30px;
+    display: flex;
+    margin: 10px;
+}
+
+.cart-user img {
+    width: 150px;
+    height: 150px;
+    margin-right: 10px;
+}
+
+.cart-user .cart-cart {
+    position: relative;
+    margin-left: 30px;
+}
+
+.cart-user .cart-cart .btn {
+    position: absolute;
+    bottom: 0;
+    right: -20px;
+}
+
+.user-active::before {
+    content: '------';
+    background: #2bff00;
+    border-radius: 50%;
+    width: 5px;
+    height: 5px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.cart-user a {
+    color: aliceblue;
+}

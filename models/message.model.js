@@ -20,8 +20,12 @@ exports.getMessages = async chatId => {
             populate: {
                 path: 'users',
                 model: 'user',
-                select: 'username image'
+                select: 'username image chats'
             }
+        }).then(data => {
+            return data
+        }).catch(err => {
+            console.log("err: ", err, '\n========================');
         })
         mongoose.disconnect()
         return messages

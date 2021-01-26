@@ -7,8 +7,8 @@
     <ul>
         <% if (isUser) { %>
             <li><a href="/" <%= pageTitle === 'Home' ? 'class=active': '' %>>Home</a></li>
-            <li><a href="/cart" <%= pageTitle === 'Groups' ? 'class=active': '' %>>Groups</a></li>
-            <li><a href="/orders" <%= pageTitle === 'Friends' ? 'class=active': '' %>>Friends</a></li>
+            <li><a href="/group" <%= pageTitle === 'Groups' ? 'class=active': '' %>>Groups</a></li>
+            <li><a href="/friend" <%= pageTitle === 'Friends' ? 'class=active': '' %>>Friends</a></li>
             <li><a href="/profile" <%= pageTitle === myName ? 'class=active': '' %>>profile</a></li>
         <% } else { %>
             <li><a href="/login" <%= pageTitle === 'Login' ? 'class=active': '' %>>Login</a></li>

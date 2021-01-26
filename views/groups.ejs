@@ -1,0 +1,59 @@
+<link rel="stylesheet" href="/css/auth.css">
+<%- include('parts/header.ejs') %>
+<%- include('parts/navbar.ejs') %>
+<link rel="stylesheet" href="/css/msg.css">
+
+<style>
+    body {
+        margin-bottom: 80px;
+    }
+</style>
+
+<button class="btn btn-pr" style="position: fixed;right: 30px;bottom: 20px;" id="btn-messge" data-id="add-g">Add Group</button>
+
+<div class="container">
+    <div id="onlineFriends">
+        <% if ( chats.length === 0 ) { %>
+            <div class="aleart aleart-err">No Groups</div>
+        <% } %>
+        <% for( let chat of chats ) { %>
+                <div class='cart-user'>
+                    <img class="user-active" src="/<%= chat.image %>">
+                    <div class="cart-cart">       
+                        <h3><%= chat.name %></h3>   
+                        <a class="btn btn-pr" href="/group/<%= chat._id %>">Chat</a>
+                    </div>
+                </div>
+        <% } %>
+    </div>
+</div>
+
+
+<div class="mm" id="add-g">
+    <form class="messge-btn black" action="group/addGroup" method="POST" style="width: 40%">
+        <div class="title">
+            Add Group
+        </div>
+        <div class="messge-M" id="1ad58s7r1ft6s48zg4a1">
+            
+                <div class="input-field">
+                    <input type="text" name="name" required>
+                        <label>name</label>
+                    <span></span>
+                </div>
+
+        </div>
+        <div class="bottom-messge">
+            <button type="submit" class="btn btn-pr">OK</button>
+            <button type="button" id="clous" class="sss btn btn-pr">Censel</button>
+        </div>
+    </form>
+    <div id="clous" class="blur"></div>
+</div>
+
+
+<%- include('parts/scripts.ejs') %>
+<script src="/js/msg.js"></script>
+
+</body>
+</html>

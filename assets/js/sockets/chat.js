@@ -2,11 +2,13 @@ const chatId = document.getElementById('chatId').value
 const msg = document.getElementById('message')
 const sendBtn = document.getElementById('sendBtn')
 const msgContainer = document.getElementById('messages-container')
+    //const callBtn = document.getElementById('callBtn')
 
 socket.emit('joinChat', chatId)
 
 sendBtn.onclick = () => {
     let content = msg.value
+    console.log("test");
     socket.emit('sendMessage', {
         chat: chatId,
         content: content,
@@ -29,4 +31,26 @@ socket.on('newMessage', msg => {
     html += '<div>\n'
 
     msgContainer.innerHTML += html
+})
+
+let peer = new Peer()
+let peerId = null
+peer.on('open', id => {
+    console.log('my id', id)
+    peerId = id
+})
+
+/* callBtn.onclick = () => {
+    socket.emit('requestPeerId', chatId)
+} */
+
+socket.on('getPeerId', () => {
+    socket.emit('sendPeerId', {
+        chatId: chatId,
+        peerId: peerId
+    })
+})
+
+socket.on('recievePeerId', id => {
+    console.log(id);
 })

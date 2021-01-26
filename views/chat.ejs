@@ -4,11 +4,14 @@
 <div class="cart-group-2">
 
     <div class="cart-user-l">
-
+        
         <img src="/<%= friendData.image %>"> <br>
-        <a class="btn btn-pr" href="/profile/<%= friendData.id %>"><%= friendData.username %></a>
         <input type="hidden" id="chatId" value="<%= chatId %>">
-
+        <% if (type == 'privete') { %>
+            <a class="btn btn-pr" href="/profile/<%= friendData.id %>"><%= friendData.username %></a>
+            <button class="btn btn-pr" id="callBtn">video call</button>
+        <% } %>
+        
     </div>
     
     <div id="messages-container" class="cart-message">
@@ -32,6 +35,7 @@
 
 <%- include('parts/scripts.ejs') %>
 <script src="/socket.io/socket.io.js"></script>
+<script src="/peerjs.min.js"></script>
 <script src="/js/sockets/init.js"></script>
 <script src="/js/sockets/chat.js"></script>
 

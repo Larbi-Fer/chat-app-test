@@ -12,6 +12,7 @@ const profileRouter = require('./routes/profile.router')
 const freindRouter = require('./routes/friend.router')
 const homeRouter = require('./routes/home.router')
 const chatRouter = require('./routes/chat.router')
+const groupRouter = require('./routes/groups.router')
 
 const getFriendRequest = require('./models/user.model').getFriendRequests
 
@@ -62,6 +63,7 @@ app.use('/', authRouter)
 app.use('/profile', profileRouter)
 app.use('/friend', freindRouter)
 app.use('/chat', chatRouter)
+app.use('/group', groupRouter)
 
 
 app.get('/error', (req, res, next) => {

@@ -21,13 +21,14 @@ const userSchema = mongoose.Schema({
     sendRequests: {
         type: [{ name: String, id: String }],
         default: []
-    }
+    },
+    chatsId: [{ type: mongoose.Schema.Types.ObjectId, ref: 'chat' }]
 });
 
 const User = mongoose.model("user", userSchema);
 exports.User = User
 
-exports.getUserId = id => {
+exports.getUserById = id => {
     return new Promise((resolve, reject) => {
         mongoose.connect(DB_URL).then(() => {
             return User.findById(id)
@@ -187,5 +188,30 @@ exports.getFriends = async id => {
     } catch (error) {
         mongoose.disconnect()
         throw new Error(error)
+    }
+}
+
+exports.AddGroupChat = async(userId, chatId) => {
+    console.log("chatId: ", chatId);
+
+    try {
+        await mongoose.connect(DB_URL)
+        let data
+        await User.updateOne({ _id: userId }, {
+            $push: {
+                chatsId: chatId
+            }
+        }).then(res => {
+            data = res
+            console.log("\nres: ", res, "\n");
+        }).catch(err => {
+            mongoose.disconnect()
+            console.log("error: ", err);
+        })
+        mongoose.disconnect()
+        return data.chats
+    } catch (error) {
+        mongoose.disconnect()
+        throw new Error("error : " + error)
     }
 }

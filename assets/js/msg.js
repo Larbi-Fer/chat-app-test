@@ -11,18 +11,6 @@ s.forEach(btn => {
                 document.querySelector("#" + vid).style.display = 'block';
                 vid = "#" + vid;
 
-                var msg = document.getElementById("1ad58s7r1ft6s48zg4a1");
-                var dataSpl = this.getAttribute('data').split(",")
-                var data = "<input type='hidden' name='name' value='" + dataSpl[0] + "'>\n";
-                data += "<div class='input-field'>"
-                data += "    <input type='text' name='address' required>"
-                data += "    <label>Address</label>"
-                data += "    <span></span>"
-                data += "</div>"
-                data += "<input type='hidden' name='userId' value='" + dataSpl[3] + "'>\n"
-                data += "<input type='hidden' name='amount' value='" + dataSpl[1] + "'>\n";
-                data += "<input type='hidden' name='id' value='" + dataSpl[2] + "'>";
-                msg.innerHTML = data;
                 setTimeout(() => {
                     document.querySelector(vid + ' .messge-btn').classList.add('active');
                     document.querySelector(vid).classList.add('active');

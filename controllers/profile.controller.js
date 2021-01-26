@@ -16,7 +16,7 @@ exports.redirect = (req, res, next) => {
 
 exports.getProfile = (req, res, next) => {
     let id = req.params.id
-    userModel.getUserId(id).then(data => {
+    userModel.getUserById(id).then(data => {
         res.render("profile", {
             pageTitle: data.username,
             isUser: req.session.userId,

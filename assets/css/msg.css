@@ -52,8 +52,9 @@
 
 /*  العنوان  */
 
-.title {
+.messge-btn .title {
     padding: 15px 20px;
+    margin: 0 !important;
     text-align: left;
     border-bottom: 1px solid rgba(255, 255, 255, .2);
     font-weight: 1000;

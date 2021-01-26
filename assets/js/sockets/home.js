@@ -3,7 +3,7 @@ socket.emit('getOnlineFriends', myId)
 socket.on('onlineFriends', friends => {
     let div = document.getElementById('onlineFriends')
     if (friends.length === 0) {
-        div.innerHTML = "<p class'aleart aleart-dg'>no Online Friends</p>"
+        div.innerHTML = "<p class'aleart aleart-err'>no Online Friends</p>"
     } else {
         let html = "<div class='container'>\n"
         for (let friend of friends) {
